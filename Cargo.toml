@@ -1,0 +1,90 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/api",
+    "crates/auth",
+    "crates/core",
+    "crates/mailer",
+    "crates/payment",
+    "crates/ws",
+]
+
+[workspace.package]
+version     = "0.1.0"
+edition     = "2021"
+authors     = ["AgriMarket"]
+repository  = "https://github.com/yourusername/agrimarket"
+
+# ── Shared dependency versions ─────────────────────────────────────────────
+[workspace.dependencies]
+# Async runtime
+tokio          = { version = "1", features = ["full"] }
+reqwest = { version = "0.12", features = ["multipart","json"] }
+hmac   = { version = "0.12" }
+
+# Web framework
+axum           = { version = "0.7", features = ["macros", "ws", "multipart"] }
+tower          = { version = "0.4" }
+tower-http     = { version = "0.5", features = ["cors", "trace", "compression-gzip"] }
+
+# Database
+sqlx = { version = "0.7", features = [
+    "runtime-tokio-rustls",
+    "postgres",
+    "uuid",
+    "chrono",
+    "rust_decimal",
+    "migrate",
+] }
+
+
+
+
+
+# Serialisation
+serde          = { version = "1", features = ["derive"] }
+serde_json     = { version = "1" }
+
+# Auth / crypto
+jsonwebtoken   = { version = "9" }
+argon2         = { version = "0.5" }
+rand           = { version = "0.8" }
+
+
+
+# Redis
+redis          = { version = "0.25", features = ["tokio-comp", "connection-manager"] }
+
+# Email
+resend-rs      = { version = "0.9" }
+
+# Validation
+validator      = { version = "0.18", features = ["derive"] }
+
+# IDs / time
+uuid           = { version = "1", features = ["v4", "serde"] }
+chrono         = { version = "0.4", features = ["serde"] }
+
+# Decimal — for GBP monetary values and quantities (maps to Postgres numeric)
+rust_decimal   = { version = "1", features = ["serde-with-str"] }
+rust_decimal_macros = { version = "1" }
+
+# Error handling
+thiserror      = { version = "1" }
+anyhow         = { version = "1" }
+
+# Tracing / logging
+tracing            = { version = "0.1" }
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# Config
+dotenvy        = { version = "0.15" }
+config         = { version = "0.14" }
+
+# Cron
+tokio-cron-scheduler = { version = "0.10" }
+
+base64 = { version = "0.22" }
+hex    = { version = "0.4" }
+sha2   = { version = "0.10" }
+
