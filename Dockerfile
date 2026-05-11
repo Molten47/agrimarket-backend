@@ -1,5 +1,5 @@
 # ── Stage 1: Builder ─────────────────────────────────────────────────────────
-FROM rust:1.82-slim AS builder
+FROM rust:1.86-slim AS builder
 
 WORKDIR /app
 
@@ -53,6 +53,6 @@ RUN apt-get update && apt-get install -y \
 COPY --from=builder /app/target/release/agrimarket .
 
 # Render assigns PORT dynamically — app must read this
-EXPOSE 8081
+
 
 CMD ["./agrimarket"]
