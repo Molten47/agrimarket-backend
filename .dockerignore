@@ -1,0 +1,6 @@
+# Don't send these to Render's build context
+.git
+target/
+.env
+*.env
+docker-compose.yml
