@@ -1,0 +1,28 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT farmer_id, expires_at\n        FROM verification_tokens\n        WHERE token = $1\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "farmer_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "expires_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false
+    ]
+  },
+  "hash": "4ef6d21b43bdae712e0f0e5f52476e00a0964540d3ad63990ccf1c4dc6e67cff"
+}

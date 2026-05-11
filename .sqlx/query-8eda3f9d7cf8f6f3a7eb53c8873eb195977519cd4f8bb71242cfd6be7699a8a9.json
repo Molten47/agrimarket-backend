@@ -1,0 +1,41 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            s.id,\n            s.quantity_available,\n            s.quantity_reserved,\n            s.low_stock_threshold\n        FROM stock s\n        JOIN products p ON p.id = s.product_id\n        WHERE p.slug       = $1\n          AND p.farmer_id  = $2\n          AND p.is_active  = true\n          AND p.is_deleted = false\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "quantity_available",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 2,
+        "name": "quantity_reserved",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 3,
+        "name": "low_stock_threshold",
+        "type_info": "Numeric"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "8eda3f9d7cf8f6f3a7eb53c8873eb195977519cd4f8bb71242cfd6be7699a8a9"
+}

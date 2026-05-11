@@ -1,0 +1,64 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            ci.product_id,\n            p.name              AS product_name,\n            p.slug              AS product_slug,\n            f.farm_name,\n            p.unit,\n            ci.quantity,\n            p.price_per_unit,\n            s.stock_status::text AS \"stock_status!: String\"\n        FROM cart_items ci\n        JOIN products p ON p.id = ci.product_id\n        JOIN farmers  f ON f.id = p.farmer_id\n        JOIN stock    s ON s.product_id = p.id\n        WHERE ci.cart_id = $1\n        ORDER BY ci.added_at\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "product_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "product_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "product_slug",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "farm_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "unit",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 5,
+        "name": "quantity",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 6,
+        "name": "price_per_unit",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 7,
+        "name": "stock_status!: String",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      null
+    ]
+  },
+  "hash": "a85e3e04b5b28f400086ac027e6bc4bde24bfaff3ce999a89a81c8d3d7f692de"
+}

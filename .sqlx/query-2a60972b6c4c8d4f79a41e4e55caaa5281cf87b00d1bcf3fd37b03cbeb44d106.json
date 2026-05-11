@@ -1,0 +1,41 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT id, order_key, total_amount_gbp, payment_reference\n        FROM orders\n        WHERE id = $1 AND order_key = $2\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "order_key",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "total_amount_gbp",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 3,
+        "name": "payment_reference",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  "hash": "2a60972b6c4c8d4f79a41e4e55caaa5281cf87b00d1bcf3fd37b03cbeb44d106"
+}

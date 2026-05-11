@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            UPDATE stock\n            SET\n                quantity_reserved = quantity_reserved + $1,\n                stock_status = CASE\n                    WHEN (quantity_available - quantity_reserved - $1) <= 0\n                        THEN 'out_of_stock'::stock_status\n                    WHEN (quantity_available - quantity_reserved - $1) <= low_stock_threshold\n                        THEN 'low_stock'::stock_status\n                    ELSE 'in_stock'::stock_status\n                END,\n                updated_at = now()\n            WHERE product_id = $2\n            ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Numeric",
+        "Uuid"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "ecfaacfebc7cecfed75c11a06f3f7c7a458bbfc3b52b43690d3fc61c19f1deb8"
+}

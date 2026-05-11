@@ -1,0 +1,29 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            COUNT(DISTINCT o.guest_email)                          AS \"unique_customers!: i64\",\n            COUNT(DISTINCT o.guest_email)\n                FILTER (WHERE sub.order_count > 1)                 AS \"repeat_customers!: i64\"\n        FROM orders o\n        JOIN stock    s ON s.id = o.stock_id\n        JOIN products p ON p.id = s.product_id\n        JOIN (\n            SELECT guest_email, COUNT(*) AS order_count\n            FROM orders o2\n            JOIN stock    s2 ON s2.id = o2.stock_id\n            JOIN products p2 ON p2.id = s2.product_id\n            WHERE p2.farmer_id    = $1\n              AND o2.order_status != 'cancelled'\n            GROUP BY guest_email\n        ) sub ON sub.guest_email = o.guest_email\n        WHERE p.farmer_id    = $1\n          AND o.order_status != 'cancelled'\n          AND o.placed_at    >= now() - ($2 || ' days')::interval\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "unique_customers!: i64",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "repeat_customers!: i64",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Text"
+      ]
+    },
+    "nullable": [
+      null,
+      null
+    ]
+  },
+  "hash": "b5116b9cc10d40a87b12da30d32c2ab4ec3373902761f12b51100c38ccf3eedf"
+}

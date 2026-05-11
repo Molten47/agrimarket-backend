@@ -1,0 +1,58 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            p.name                                          AS product_name,\n            p.slug                                          AS product_slug,\n            s.quantity_available,\n            s.quantity_reserved,\n            s.low_stock_threshold,\n            s.stock_status::text                            AS \"stock_status!: String\",\n            COALESCE(sales.units_sold, 0)                   AS \"units_sold_30d!: Decimal\"\n        FROM products p\n        JOIN stock s ON s.product_id = p.id\n        LEFT JOIN (\n            SELECT\n                oi.product_id,\n                SUM(oi.quantity) AS units_sold\n            FROM order_items oi\n            JOIN orders o ON o.id = oi.order_id\n            WHERE o.order_status != 'cancelled'\n              AND o.placed_at >= now() - interval '30 days'\n            GROUP BY oi.product_id\n        ) sales ON sales.product_id = p.id\n        WHERE p.farmer_id  = $1\n          AND p.is_active   = true\n          AND p.is_deleted  = false\n        ORDER BY s.stock_status, s.quantity_available ASC\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "product_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 1,
+        "name": "product_slug",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "quantity_available",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 3,
+        "name": "quantity_reserved",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 4,
+        "name": "low_stock_threshold",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 5,
+        "name": "stock_status!: String",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 6,
+        "name": "units_sold_30d!: Decimal",
+        "type_info": "Numeric"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      null,
+      null
+    ]
+  },
+  "hash": "a8f061060b63625594c2aee7c961fdc0304bbe87e35fb2979c3a71df82141d09"
+}

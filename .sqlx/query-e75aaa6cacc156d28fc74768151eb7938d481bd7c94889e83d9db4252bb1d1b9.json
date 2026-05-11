@@ -1,0 +1,52 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            ci.product_id,\n            ci.quantity,\n            p.name            AS product_name,\n            p.price_per_unit,\n            s.id              AS stock_id,\n            s.quantity_available - s.quantity_reserved\n                              AS \"free_quantity!: Decimal\"\n        FROM cart_items ci\n        JOIN products p ON p.id = ci.product_id\n        JOIN stock    s ON s.product_id = ci.product_id\n        WHERE ci.cart_id = $1\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "product_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "quantity",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 2,
+        "name": "product_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "price_per_unit",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 4,
+        "name": "stock_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 5,
+        "name": "free_quantity!: Decimal",
+        "type_info": "Numeric"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      null
+    ]
+  },
+  "hash": "e75aaa6cacc156d28fc74768151eb7938d481bd7c94889e83d9db4252bb1d1b9"
+}

@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        DELETE FROM cart_items\n        WHERE cart_id   = (SELECT id FROM cart WHERE session_key = $1)\n          AND product_id = $2\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Uuid"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "d46d8978a8adebe1dd0588a76d29014a39d3035a6f968f6dd9db98a0590545e1"
+}

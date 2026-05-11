@@ -1,0 +1,20 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        UPDATE products\n        SET\n            name           = COALESCE($1, name),\n            description    = COALESCE($2, description),\n            price_per_unit = COALESCE($3, price_per_unit),\n            unit           = COALESCE($4, unit),\n            category_id    = COALESCE($5, category_id),\n            updated_at     = now()\n        WHERE slug      = $6\n          AND farmer_id = $7\n          AND is_active  = true\n          AND is_deleted = false\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Varchar",
+        "Text",
+        "Numeric",
+        "Varchar",
+        "Uuid",
+        "Text",
+        "Uuid"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "1b26c78f523c9c25399d24235b74e68c3d16e9707b549c825c17b3a7efa951c0"
+}

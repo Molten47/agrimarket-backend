@@ -1,0 +1,35 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        INSERT INTO orders (\n            stock_id, order_key,\n            guest_email, guest_phone,\n            delivery_address, delivery_county, delivery_postcode,\n            total_amount_gbp\n        )\n        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)\n        RETURNING id, order_key\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "order_key",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Varchar",
+        "Varchar",
+        "Varchar",
+        "Text",
+        "Varchar",
+        "Varchar",
+        "Numeric"
+      ]
+    },
+    "nullable": [
+      false,
+      false
+    ]
+  },
+  "hash": "ead9274d5601dcc75ddeeb5638ed368f5b66ecbcf4564b59b21e3495c2811532"
+}

@@ -1,0 +1,52 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            oi.product_id,\n            p.name          AS product_name,\n            p.slug          AS product_slug,\n            oi.quantity,\n            oi.unit_price_gbp,\n            oi.subtotal_gbp\n        FROM order_items oi\n        JOIN products p ON p.id = oi.product_id\n        WHERE oi.order_id = $1\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "product_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "product_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "product_slug",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "quantity",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 4,
+        "name": "unit_price_gbp",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 5,
+        "name": "subtotal_gbp",
+        "type_info": "Numeric"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "05ce2bd71a0ed5fcf358f0fc02a6da1f943f2dfa42a5afa7efe75b650210b9b0"
+}

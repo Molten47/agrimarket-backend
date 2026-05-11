@@ -1,0 +1,50 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        INSERT INTO expenses (farmer_id, amount_gbp, category, description, expense_date)\n        VALUES ($1, $2, $3, $4, $5)\n        RETURNING id, amount_gbp, category, description,\n                  expense_date::text AS \"expense_date!: String\"\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "amount_gbp",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 2,
+        "name": "category",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "description",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "expense_date!: String",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Numeric",
+        "Text",
+        "Text",
+        "Date"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      null
+    ]
+  },
+  "hash": "b62439d7558bc1fb16b574f7621c5a77a39f137b2b6fd33d13cbe4a904de3b6e"
+}

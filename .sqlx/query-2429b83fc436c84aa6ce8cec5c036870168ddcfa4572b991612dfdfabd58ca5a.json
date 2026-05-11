@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n                    UPDATE orders\n                    SET payment_status = 'failed'::payment_status,\n                        updated_at     = now()\n                    WHERE id                = $1\n                      AND payment_reference = $2\n                    ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "2429b83fc436c84aa6ce8cec5c036870168ddcfa4572b991612dfdfabd58ca5a"
+}

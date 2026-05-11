@@ -1,0 +1,14 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "UPDATE refresh_tokens SET is_revoked = true, revoked_at = now()\n                 WHERE token_hash = $1",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "4553278d918e578a4319f1863347b3dbec3d064a881fc6444fffd9a408ba4564"
+}

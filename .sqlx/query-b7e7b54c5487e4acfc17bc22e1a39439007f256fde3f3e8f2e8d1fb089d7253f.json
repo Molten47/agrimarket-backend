@@ -1,0 +1,28 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n    INSERT INTO stock\n        (product_id, quantity_available, low_stock_threshold, stock_status)\n    VALUES ($1, $2, $3, $4::stock_status)\n    ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Numeric",
+        "Numeric",
+        {
+          "Custom": {
+            "name": "stock_status",
+            "kind": {
+              "Enum": [
+                "in_stock",
+                "low_stock",
+                "out_of_stock"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "b7e7b54c5487e4acfc17bc22e1a39439007f256fde3f3e8f2e8d1fb089d7253f"
+}

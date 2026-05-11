@@ -36,7 +36,7 @@ COPY . .
 # Touch main.rs so Cargo knows to recompile the binary
 RUN touch crates/api/src/main.rs
 
-RUN cargo build --release --bin agrimarket
+RUN SQLX_OFFLINE=true cargo build --release --bin agrimarket
 
 # ── Stage 2: Runtime (tiny Debian image) ─────────────────────────────────────
 FROM debian:bookworm-slim

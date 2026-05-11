@@ -1,0 +1,59 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO farmers\n                (email, password_hash, farm_name, full_name, phone, county, postcode, bio)\n            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)\n            RETURNING id, email, farm_name, full_name, county, postcode\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "email",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "farm_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "full_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "county",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 5,
+        "name": "postcode",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Varchar",
+        "Text",
+        "Varchar",
+        "Varchar",
+        "Varchar",
+        "Varchar",
+        "Varchar",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "e786a36c9c5eeb98ad81f333754d876e6a9e55cf48c297ee987fefaa1770fc7a"
+}

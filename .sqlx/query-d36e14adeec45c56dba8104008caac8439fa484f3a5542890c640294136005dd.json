@@ -1,0 +1,23 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT o.id\n        FROM orders o\n        JOIN stock    s ON s.id = o.stock_id\n        JOIN products p ON p.id = s.product_id\n        WHERE o.id        = $1\n          AND p.farmer_id = $2\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "d36e14adeec45c56dba8104008caac8439fa484f3a5542890c640294136005dd"
+}

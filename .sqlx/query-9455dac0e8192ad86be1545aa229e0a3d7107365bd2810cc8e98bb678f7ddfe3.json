@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        UPDATE orders\n        SET payment_reference = $1,\n            payment_method    = 'stripe',\n            updated_at        = now()\n        WHERE id = $2\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Varchar",
+        "Uuid"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "9455dac0e8192ad86be1545aa229e0a3d7107365bd2810cc8e98bb678f7ddfe3"
+}

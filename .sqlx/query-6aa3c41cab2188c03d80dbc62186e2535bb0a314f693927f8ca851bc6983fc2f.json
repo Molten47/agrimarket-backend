@@ -1,0 +1,17 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        INSERT INTO notifications (\n            farmer_id, order_id, channel,\n            recipient_email, event_type, payload, is_sent\n        )\n        VALUES ($1, $2, 'websocket', $3, 'new_order', $4, false)\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Uuid",
+        "Varchar",
+        "Jsonb"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "6aa3c41cab2188c03d80dbc62186e2535bb0a314f693927f8ca851bc6983fc2f"
+}

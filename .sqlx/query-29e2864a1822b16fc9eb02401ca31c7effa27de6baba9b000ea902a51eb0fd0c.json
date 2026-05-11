@@ -1,0 +1,82 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            o.id,\n            o.order_key,\n            o.order_status::text   AS \"order_status!: String\",\n            o.payment_status::text AS \"payment_status!: String\",\n            o.guest_email,\n            o.guest_phone,\n            o.delivery_address,\n            o.delivery_county,\n            o.delivery_postcode,\n            o.total_amount_gbp,\n            o.placed_at\n        FROM orders o\n        WHERE o.id = $1\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "order_key",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "order_status!: String",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "payment_status!: String",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "guest_email",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 5,
+        "name": "guest_phone",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 6,
+        "name": "delivery_address",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 7,
+        "name": "delivery_county",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 8,
+        "name": "delivery_postcode",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 9,
+        "name": "total_amount_gbp",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 10,
+        "name": "placed_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      null,
+      null,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "29e2864a1822b16fc9eb02401ca31c7effa27de6baba9b000ea902a51eb0fd0c"
+}

@@ -1,0 +1,35 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO products\n            (farmer_id, category_id, name, slug, description, price_per_unit, unit, image_url)\n        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)\n        RETURNING id, slug\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "slug",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Uuid",
+        "Varchar",
+        "Varchar",
+        "Text",
+        "Numeric",
+        "Varchar",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false
+    ]
+  },
+  "hash": "7a844ab9def9ae5e722d43b2d3a4e8e527611019e537b15fc21d9dfaf338fde8"
+}

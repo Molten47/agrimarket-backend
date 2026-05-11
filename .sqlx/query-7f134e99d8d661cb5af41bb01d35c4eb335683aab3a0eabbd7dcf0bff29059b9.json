@@ -1,0 +1,30 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        UPDATE orders o\n        SET order_status = $1::order_status,\n            updated_at   = now()\n        FROM stock s\n        JOIN products p ON p.id = s.product_id\n        WHERE o.stock_id  = s.id\n          AND p.farmer_id = $2\n          AND o.id        = $3\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        {
+          "Custom": {
+            "name": "order_status",
+            "kind": {
+              "Enum": [
+                "pending",
+                "confirmed",
+                "processing",
+                "dispatched",
+                "delivered",
+                "cancelled"
+              ]
+            }
+          }
+        },
+        "Uuid",
+        "Uuid"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "7f134e99d8d661cb5af41bb01d35c4eb335683aab3a0eabbd7dcf0bff29059b9"
+}

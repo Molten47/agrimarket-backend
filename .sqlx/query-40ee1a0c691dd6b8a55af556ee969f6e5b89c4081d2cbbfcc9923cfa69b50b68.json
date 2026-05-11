@@ -1,0 +1,28 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            quantity_available - quantity_reserved AS \"free_quantity!: Decimal\",\n            stock_status::text                     AS \"stock_status!: String\"\n        FROM stock\n        WHERE product_id = $1\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "free_quantity!: Decimal",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 1,
+        "name": "stock_status!: String",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      null,
+      null
+    ]
+  },
+  "hash": "40ee1a0c691dd6b8a55af556ee969f6e5b89c4081d2cbbfcc9923cfa69b50b68"
+}

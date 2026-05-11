@@ -1,0 +1,29 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            o.delivery_county   AS county,\n            COUNT(*)            AS \"orders!: i64\"\n        FROM orders o\n        JOIN stock    s ON s.id = o.stock_id\n        JOIN products p ON p.id = s.product_id\n        WHERE p.farmer_id    = $1\n          AND o.order_status != 'cancelled'\n          AND o.placed_at    >= now() - ($2 || ' days')::interval\n        GROUP BY o.delivery_county\n        ORDER BY COUNT(*) DESC\n        LIMIT 5\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "county",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 1,
+        "name": "orders!: i64",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      null
+    ]
+  },
+  "hash": "e1752cf306180b40ee8faec76541b97fbe0ff5de4a57cdd70ccfa4940ada2666"
+}

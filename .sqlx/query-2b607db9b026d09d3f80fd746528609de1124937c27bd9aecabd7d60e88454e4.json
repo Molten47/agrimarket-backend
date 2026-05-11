@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        UPDATE notifications\n        SET is_sent  = true,\n            sent_at  = now()\n        WHERE id        = $1\n          AND farmer_id = $2\n          AND is_sent   = false\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Uuid"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "2b607db9b026d09d3f80fd746528609de1124937c27bd9aecabd7d60e88454e4"
+}

@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n    INSERT INTO verification_tokens (farmer_id, token)\n    VALUES ($1, $2)\n    ON CONFLICT (farmer_id) DO UPDATE SET\n        token      = EXCLUDED.token,\n        expires_at = now() + interval '24 hours'\n    ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "83b32f04a8f5eaa7bcc9fe35bcfad29edbeaa5a936e2e1ccf00a4271af085676"
+}

@@ -1,0 +1,70 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            s.id                  AS stock_id,\n            s.product_id,\n            p.name                AS product_name,\n            p.slug                AS product_slug,\n            s.quantity_available,\n            s.quantity_reserved,\n            s.low_stock_threshold,\n            s.stock_status::text  AS \"stock_status!: String\",\n            s.updated_at\n        FROM stock s\n        JOIN products p ON p.id = s.product_id\n        WHERE p.farmer_id  = $1\n          AND p.is_active  = true\n          AND p.is_deleted = false\n        ORDER BY s.stock_status, p.name\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "stock_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "product_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 2,
+        "name": "product_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "product_slug",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "quantity_available",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 5,
+        "name": "quantity_reserved",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 6,
+        "name": "low_stock_threshold",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 7,
+        "name": "stock_status!: String",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 8,
+        "name": "updated_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      null,
+      false
+    ]
+  },
+  "hash": "3e7c0e926cb9b873667daf51956a51e7917f24e0f1b35e0416257d532e599eb2"
+}

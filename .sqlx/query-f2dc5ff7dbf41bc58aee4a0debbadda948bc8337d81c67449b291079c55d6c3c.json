@@ -1,0 +1,72 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        UPDATE stock\n        SET\n            quantity_available  = $1,\n            low_stock_threshold = $2,\n            stock_status        = $3::stock_status,\n            updated_at          = now()\n        WHERE id = $4\n        RETURNING\n            id                  AS stock_id,\n            product_id,\n            quantity_available,\n            quantity_reserved,\n            low_stock_threshold,\n            stock_status::text  AS \"stock_status!: String\",\n            updated_at\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "stock_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "product_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 2,
+        "name": "quantity_available",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 3,
+        "name": "quantity_reserved",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 4,
+        "name": "low_stock_threshold",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 5,
+        "name": "stock_status!: String",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 6,
+        "name": "updated_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Numeric",
+        "Numeric",
+        {
+          "Custom": {
+            "name": "stock_status",
+            "kind": {
+              "Enum": [
+                "in_stock",
+                "low_stock",
+                "out_of_stock"
+              ]
+            }
+          }
+        },
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      null,
+      false
+    ]
+  },
+  "hash": "f2dc5ff7dbf41bc58aee4a0debbadda948bc8337d81c67449b291079c55d6c3c"
+}

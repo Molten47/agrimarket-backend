@@ -1,0 +1,47 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            p.name                           AS product_name,\n            p.slug                           AS product_slug,\n            SUM(oi.subtotal_gbp)             AS \"total_revenue!: Decimal\",\n            SUM(oi.quantity)                 AS \"units_sold!: Decimal\",\n            COUNT(DISTINCT o.id)             AS \"order_count!: i64\"\n        FROM order_items oi\n        JOIN orders   o ON o.id = oi.order_id\n        JOIN products p ON p.id = oi.product_id\n        WHERE p.farmer_id    = $1\n          AND o.order_status != 'cancelled'\n          AND o.placed_at    >= now() - ($2 || ' days')::interval\n        GROUP BY p.id, p.name, p.slug\n        ORDER BY SUM(oi.subtotal_gbp) DESC\n        LIMIT 5\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "product_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 1,
+        "name": "product_slug",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "total_revenue!: Decimal",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 3,
+        "name": "units_sold!: Decimal",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 4,
+        "name": "order_count!: i64",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      null,
+      null,
+      null
+    ]
+  },
+  "hash": "271a53aba7de4e0c0e3f72b5c5cc35629cb6da5d2a15c4c6903f23ca87a5e885"
+}

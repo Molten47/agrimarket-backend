@@ -1,0 +1,80 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            id,\n            farmer_id,\n            order_id,\n            channel::text       AS \"channel!: String\",\n            recipient_email,\n            event_type,\n            payload,\n            is_sent,\n            sent_at,\n            created_at\n        FROM notifications\n        WHERE farmer_id  = $1\n          AND ($2::bool   IS NULL OR is_sent     = $2)\n          AND ($3::text   IS NULL OR event_type  = $3)\n        ORDER BY created_at DESC\n        LIMIT $4 OFFSET $5\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "farmer_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 2,
+        "name": "order_id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 3,
+        "name": "channel!: String",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "recipient_email",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 5,
+        "name": "event_type",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 6,
+        "name": "payload",
+        "type_info": "Jsonb"
+      },
+      {
+        "ordinal": 7,
+        "name": "is_sent",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 8,
+        "name": "sent_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 9,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Bool",
+        "Text",
+        "Int8",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      true,
+      true,
+      null,
+      true,
+      false,
+      false,
+      false,
+      true,
+      false
+    ]
+  },
+  "hash": "3083908d87e61242fa6dc5ce415ac8269adbaa8c34225fd82c1db7c7aa60ed45"
+}

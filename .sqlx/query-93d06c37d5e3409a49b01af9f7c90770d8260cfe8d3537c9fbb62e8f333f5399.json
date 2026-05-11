@@ -1,0 +1,30 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            COALESCE(SUM(o.total_amount_gbp), 0) AS \"total!: Decimal\",\n            COUNT(*)                             AS \"count!: i64\"\n        FROM orders o\n        JOIN stock    s ON s.id = o.stock_id\n        JOIN products p ON p.id = s.product_id\n        WHERE p.farmer_id     = $1\n          AND o.order_status != 'cancelled'\n          AND DATE(o.placed_at) BETWEEN $2 AND $3\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "total!: Decimal",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 1,
+        "name": "count!: i64",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Date",
+        "Date"
+      ]
+    },
+    "nullable": [
+      null,
+      null
+    ]
+  },
+  "hash": "93d06c37d5e3409a49b01af9f7c90770d8260cfe8d3537c9fbb62e8f333f5399"
+}

@@ -1,0 +1,41 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            o.guest_email,\n            o.order_key,\n            p.name AS product_name,\n            f.email AS farmer_email\n        FROM orders o\n        JOIN stock    s ON s.id = o.stock_id\n        JOIN products p ON p.id = s.product_id\n        JOIN farmers  f ON f.id = p.farmer_id\n        WHERE o.id        = $1\n          AND p.farmer_id = $2\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "guest_email",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 1,
+        "name": "order_key",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "product_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "farmer_email",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Uuid"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "b66f77120011c39277049d08a34ee48a7676dd5a80c517d58f62a1b230d8b289"
+}

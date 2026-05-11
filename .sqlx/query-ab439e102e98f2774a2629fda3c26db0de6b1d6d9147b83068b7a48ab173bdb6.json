@@ -1,0 +1,16 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        UPDATE cart_items\n        SET quantity = $1\n        WHERE cart_id  = (SELECT id FROM cart WHERE session_key = $2)\n          AND product_id = $3\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Numeric",
+        "Text",
+        "Uuid"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "ab439e102e98f2774a2629fda3c26db0de6b1d6d9147b83068b7a48ab173bdb6"
+}

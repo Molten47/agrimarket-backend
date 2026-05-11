@@ -1,0 +1,35 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            COALESCE(SUM(o.total_amount_gbp), 0)  AS \"total_revenue!: Decimal\",\n            COUNT(*)                               AS \"total_orders!: i64\",\n            COALESCE(AVG(o.total_amount_gbp), 0)  AS \"avg_order!: Decimal\"\n        FROM orders o\n        JOIN stock    s ON s.id = o.stock_id\n        JOIN products p ON p.id = s.product_id\n        WHERE p.farmer_id    = $1\n          AND o.order_status != 'cancelled'\n          AND o.placed_at    >= now() - ($2 || ' days')::interval\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "total_revenue!: Decimal",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 1,
+        "name": "total_orders!: i64",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "avg_order!: Decimal",
+        "type_info": "Numeric"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Text"
+      ]
+    },
+    "nullable": [
+      null,
+      null,
+      null
+    ]
+  },
+  "hash": "ca077a65c7f063afeb115ead9936d8468435c5586618118de43815182ea8e29d"
+}

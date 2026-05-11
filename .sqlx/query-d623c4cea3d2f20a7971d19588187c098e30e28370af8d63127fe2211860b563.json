@@ -1,0 +1,61 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            o.id,\n            o.order_key,\n            o.guest_email,\n            o.order_status::text   AS \"order_status!: String\",\n            o.payment_status::text AS \"payment_status!: String\",\n            o.total_amount_gbp,\n            o.placed_at\n        FROM orders o\n        JOIN stock    s ON s.id = o.stock_id\n        JOIN products p ON p.id = s.product_id\n        WHERE p.farmer_id = $1\n          AND ($2::text IS NULL OR o.order_status::text = $2)\n        ORDER BY o.placed_at DESC\n        LIMIT $3 OFFSET $4\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Uuid"
+      },
+      {
+        "ordinal": 1,
+        "name": "order_key",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "guest_email",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "order_status!: String",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "payment_status!: String",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 5,
+        "name": "total_amount_gbp",
+        "type_info": "Numeric"
+      },
+      {
+        "ordinal": 6,
+        "name": "placed_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Text",
+        "Int8",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      null,
+      null,
+      false,
+      false
+    ]
+  },
+  "hash": "d623c4cea3d2f20a7971d19588187c098e30e28370af8d63127fe2211860b563"
+}
